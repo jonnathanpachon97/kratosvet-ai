@@ -1,22 +1,34 @@
 from app.schemas.chat import ChatResponse, Source
+from app.services.rag_service import RAGService
 
 
 class ChatService:
 
+    def __init__(self):
+        self.rag_service = RAGService()
+
     def ask(self, question: str) -> ChatResponse:
 
-        answer = (
-            f"Recibí tu pregunta: '{question}'. "
-            "Por ahora esta es una respuesta simulada. "
-            "En el siguiente sprint será respondida mediante un sistema RAG."
-        )
+        result = self.rag_service.ask(question)
 
         return ChatResponse(
-            answer=answer,
+            answer=result["answer"],
             sources=[
                 Source(
-                    document="Respuesta simulada",
-                    page=1
+                    document=source["document"],
+                    page=source["page"],
                 )
-            ]
+                for source in result["sources"]
+            ],
         )
+
+        return {
+            "answer": response.content,
+            "sources": [
+                {
+                    "document": doc.metadata.get("source", "Desconocido"),
+                    "page": doc.metadata.get("page", 1),
+                }
+                for doc in docs
+            ],
+        }
