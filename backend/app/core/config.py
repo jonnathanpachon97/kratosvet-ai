@@ -8,6 +8,10 @@ class Settings(BaseSettings):
     ENVIRONMENT: str
     DEBUG: bool
 
+    OPENAI_API_KEY: str
+    CHAT_MODEL: str
+    EMBEDDING_MODEL: str
+
     model_config = SettingsConfigDict(
         env_file=".env",
         extra="ignore"
