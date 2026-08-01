@@ -1,0 +1,22 @@
+# Python
+backend/.venv/
+**/__pycache__/
+*.py[cod]
+*.pyo
+
+# Variables de entorno
+backend/.env
+
+# Base vectorial
+backend/data/chroma_db/
+
+# Frontend
+frontend/node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema
+.DS_Store
+Thumbs.db
