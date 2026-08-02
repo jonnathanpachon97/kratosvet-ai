@@ -1,24 +1,16 @@
-export default function Loading(){
+export default function Loading() {
 
-    return(
+    return (
 
-        <div className="mt-6">
+        <div className="flex items-center gap-3 rounded-xl bg-slate-800 p-4 mt-6">
 
-            <div className="inline-flex gap-2 items-center bg-slate-800 rounded-xl px-4 py-3">
+            <div className="h-3 w-3 animate-ping rounded-full bg-cyan-400"></div>
 
-                <div className="animate-pulse">
+            <span className="text-slate-300">
 
-                    🐶
+                🐶 Kratos está consultando la base documental...
 
-                </div>
-
-                <span>
-
-                    KratosVet AI está analizando la documentación...
-
-                </span>
-
-            </div>
+            </span>
 
         </div>
 

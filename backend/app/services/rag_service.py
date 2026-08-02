@@ -57,13 +57,27 @@ RESPUESTA:
 
         response = self.llm.invoke(prompt)
 
+        # Eliminar fuentes duplicadas
+        sources = []
+        seen = set()
+
+        for doc in docs:
+
+            item = (
+                doc.metadata.get("source", "Desconocido"),
+                doc.metadata.get("page", 1)
+            )
+
+            if item not in seen:
+
+                seen.add(item)
+
+                sources.append({
+                    "document": item[0],
+                    "page": item[1]
+                })
+
         return {
             "answer": response.content,
-            "sources": [
-                {
-                    "document": doc.metadata.get("source", "Desconocido"),
-                    "page": doc.metadata.get("page", 1)
-                }
-                for doc in docs
-            ]
+            "sources": sources
         }

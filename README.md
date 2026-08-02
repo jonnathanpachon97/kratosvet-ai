@@ -1,137 +1,119 @@
 # 🐶 KratosVet AI
 
-Asistente Veterinario Inteligente basado en IA Generativa y RAG para propietarios de perros, con enfoque inicial en Bulldogs Franceses.
+Asistente Veterinario Inteligente especializado en perros, desarrollado como proyecto final del **Diplomado en IA Generativa** de la **Universidad de La Sabana**.
 
-Proyecto Final del Diplomado en Inteligencia Artificial Generativa.
+KratosVet AI utiliza un sistema **RAG (Retrieval-Augmented Generation)** para responder preguntas utilizando información proveniente de documentos veterinarios reales sobre salud, nutrición y cuidados caninos, especialmente del Bulldog Francés.
 
 ---
 
 # 🚀 Tecnologías utilizadas
 
-- Python 3.14
+## Backend
+
 - FastAPI
-- LangChain 1.x
-- OpenAI API
+- LangChain
+- OpenAI GPT-4o Mini
+- OpenAI Embeddings
 - ChromaDB
-- Pydantic Settings
-- Git & GitHub
+- Pydantic
+- Python 3.14
+
+## Frontend
+
+- React
+- Vite
+- Tailwind CSS
+- Axios
+- React Markdown
+- Lucide React
 
 ---
 
-# 📂 Arquitectura
+# 🏗 Arquitectura
+
+```
+Usuario
+    │
+    ▼
+React Frontend
+    │
+Axios
+    │
+    ▼
+FastAPI
+    │
+RAG Service
+    │
+Retriever
+    │
+ChromaDB
+    │
+Embeddings OpenAI
+    │
+Documentos PDF
+    │
+GPT-4o Mini
+    │
+Respuesta + Fuentes
+```
+
+---
+
+# 📂 Estructura del proyecto
 
 ```
 KratosVetAI/
 
 │
-
 ├── backend/
-
 │   ├── app/
-
 │   │   ├── api/
-
 │   │   ├── core/
-
-│   │   ├── prompts/
-
 │   │   ├── rag/
-
-│   │   │      ├── embeddings/
-
-│   │   │      ├── loaders/
-
-│   │   │      ├── retriever/
-
-│   │   │      ├── splitter/
-
-│   │   │      └── vectorstore/
-
+│   │   │   ├── embeddings/
+│   │   │   ├── loaders/
+│   │   │   ├── retriever/
+│   │   │   ├── splitter/
+│   │   │   ├── vectorstore/
+│   │   │   └── services/
 │   │   ├── schemas/
-
 │   │   └── services/
-
 │   │
-
 │   ├── data/
-
-│   │      ├── chroma_db/
-
-│   │      └── documents/
-
+│   │   ├── documents/
+│   │   └── chroma_db/
 │   │
-
 │   ├── scripts/
-
-│   │      build_vector_db.py
-
-│   │
-
-│   ├── .env
-
 │   ├── requirements.txt
-
-│   └── main.py
-
+│   └── .env.example
 │
-
 ├── frontend/
-
+│   ├── src/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── pages/
+│   │   └── services/
+│   │
+│   └── package.json
 │
-
-└── docs/
+└── README.md
 ```
 
 ---
 
-# 🧠 Arquitectura RAG
+# ⚙ Instalación
 
-```
-Usuario
+## 1. Clonar el repositorio
 
-↓
+```bash
+git clone https://github.com/jonnathanpachon97/kratosvet-ai.git
 
-FastAPI
-
-↓
-
-Retriever
-
-↓
-
-ChromaDB
-
-↓
-
-Embeddings OpenAI
-
-↓
-
-GPT-4.1-mini
-
-↓
-
-Respuesta fundamentada
+cd kratosvet-ai
 ```
 
 ---
 
-# 📚 Base de conocimiento
-
-Actualmente el sistema indexa documentación relacionada con:
-
-- Bulldog Francés
-- Enfermedades comunes
-- Alimentación canina
-- Primeros auxilios
-- Vacunación
-- Síndrome braquicefálico
-- Cuidados básicos
-- Problemas digestivos
-
----
-
-# ⚙️ Instalación
+## Backend
 
 Crear entorno virtual
 
@@ -144,7 +126,7 @@ Activar entorno
 Windows
 
 ```bash
-source .venv/Scripts/activate
+.venv\Scripts\activate
 ```
 
 Instalar dependencias
@@ -153,54 +135,122 @@ Instalar dependencias
 pip install -r requirements.txt
 ```
 
----
+Crear el archivo
 
-# Variables de entorno
-
-Crear un archivo `.env`
-
-```env
-APP_NAME=KratosVet AI
-APP_VERSION=1.0.0
-ENVIRONMENT=development
-DEBUG=True
-
-OPENAI_API_KEY=YOUR_API_KEY
-
-CHAT_MODEL=gpt-4.1-mini
-EMBEDDING_MODEL=text-embedding-3-small
+```
+backend/.env
 ```
 
----
+a partir de
 
-# Ejecutar la API
-
-```bash
-uvicorn app.main:app --reload
+```
+backend/.env.example
 ```
 
-Swagger
-
-http://127.0.0.1:8000/docs
+Agregar la API Key de OpenAI.
 
 ---
 
-# Construir la base vectorial
+### Construir la base vectorial
 
 ```bash
 python -m scripts.build_vector_db
 ```
 
-Este proceso:
+---
 
-- Lee todos los PDFs
-- Divide los documentos en chunks
-- Genera embeddings mediante OpenAI
-- Almacena los vectores en ChromaDB
+### Ejecutar Backend
 
+```bash
+uvicorn app.main:app --reload
+```
 
-# Autor
+Backend disponible en
+
+```
+http://127.0.0.1:8000
+```
+
+Documentación Swagger
+
+```
+http://127.0.0.1:8000/docs
+```
+
+---
+
+## Frontend
+
+Entrar a la carpeta
+
+```bash
+cd frontend
+```
+
+Instalar dependencias
+
+```bash
+npm install
+```
+
+Ejecutar
+
+```bash
+npm run dev
+```
+
+Disponible en
+
+```
+http://localhost:5173
+```
+
+---
+
+# 📚 Base documental
+
+Actualmente el proyecto contiene documentación veterinaria especializada utilizada para construir la base vectorial mediante embeddings.
+
+Proceso:
+
+- Carga de PDFs
+- División en chunks
+- Generación de embeddings
+- Almacenamiento en ChromaDB
+- Recuperación semántica
+- Generación de respuesta mediante GPT
+
+---
+
+# ✨ Funcionalidades
+
+- Chat veterinario especializado.
+- Recuperación semántica mediante RAG.
+- Respuestas basadas únicamente en la documentación.
+- Visualización de fuentes utilizadas.
+- Preguntas rápidas.
+- Interfaz moderna en React.
+- Markdown en respuestas.
+- Auto Scroll.
+- Indicador de carga.
+- Historial de conversación durante la sesión.
+
+---
+
+# 📸 Capturas
+
+*(Agregar imágenes del proyecto aquí.)*
+
+---
+
+# 👨‍💻 Autor
 
 **Jonnathan Pachón**
 
-Proyecto Final - Diplomado IA Generativa
+Proyecto Final
+
+Diplomado IA Generativa
+
+Universidad de La Sabana
+
+2026

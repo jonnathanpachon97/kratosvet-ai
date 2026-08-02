@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SendHorizontal } from "lucide-react";
 
-export default function ChatInput({ onSend }) {
+export default function ChatInput({ onSend, loading }) {
 
     const [text, setText] = useState("");
 
@@ -35,25 +35,32 @@ export default function ChatInput({ onSend }) {
                 border-slate-700
                 outline-none
                 focus:border-cyan-400
+                disabled:opacity-50
                 "
-                placeholder="Pregunta algo sobre tu perro..."
+                placeholder="Pregunta sobre alimentación, vacunas, enfermedades o cuidados..."
                 value={text}
+                disabled={loading}
                 onChange={(e)=>setText(e.target.value)}
             />
 
             <button
-
+                disabled={loading}
                 className="
                 bg-cyan-500
                 hover:bg-cyan-600
+                disabled:bg-slate-600
+                disabled:cursor-not-allowed
                 px-6
                 rounded-xl
                 transition
                 "
-
             >
 
-                <SendHorizontal/>
+                {
+                    loading
+                        ? "..."
+                        : <SendHorizontal />
+                }
 
             </button>
 

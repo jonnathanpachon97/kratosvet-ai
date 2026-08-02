@@ -4,6 +4,7 @@ import MessageBubble from "../components/MessageBubble";
 import Loading from "../components/Loading";
 import useChat from "../hooks/useChat";
 import QuickQuestions from "../components/QuickQuestions";
+import Footer from "../components/Footer";
 
 export default function ChatPage() {
 
@@ -28,11 +29,37 @@ export default function ChatPage() {
 
                         messages.length === 0 && (
 
-                        <QuickQuestions
+                            <>
 
-                        onSelect={send}
+                                <div className="mb-8 rounded-2xl bg-slate-800 p-6 shadow-lg">
 
-                        />
+                                    <h2 className="text-2xl font-bold text-cyan-400">
+
+                                        👋 Hola, soy KratosVet AI
+
+                                    </h2>
+
+                                    <p className="mt-3 text-slate-300">
+
+                                        Soy un asistente veterinario basado en Inteligencia Artificial
+                                        Generativa y RAG.
+
+                                    </p>
+
+                                    <p className="mt-2 text-slate-400">
+
+                                        Puedes preguntarme sobre alimentación, vacunas,
+                                        enfermedades, primeros auxilios y cuidados del Bulldog Francés.
+
+                                    </p>
+
+                                </div>
+
+                                <QuickQuestions
+                                    onSelect={send}
+                                />
+
+                            </>
 
                         )
 
@@ -65,8 +92,10 @@ export default function ChatPage() {
 
                 <ChatInput
                     onSend={send}
+                    loading={loading}
                 />
-
+            <Footer />
+            
             </div>
 
         </div>
