@@ -3,19 +3,19 @@ from app.rag.retriever.retriever_service import RetrieverService
 retriever = RetrieverService()
 
 docs = retriever.retrieve(
-    "¿Qué puede comer un bulldog francés?"
+    "alimentación bulldog francés dieta nutrición comida"
 )
 
-print("=" * 60)
-
-print(f"Resultados encontrados: {len(docs)}")
-
-print("=" * 60)
+print("=" * 80)
 
 for i, doc in enumerate(docs):
 
-    print(f"\nDocumento {i+1}")
+    print(f"\nDOCUMENTO {i+1}")
+    print("-" * 80)
 
-    print("-" * 40)
+    print("Metadata:")
+    print(doc.metadata)
 
-    print(doc.page_content[:700])
+    print("\nContenido:")
+
+    print(doc.page_content)
