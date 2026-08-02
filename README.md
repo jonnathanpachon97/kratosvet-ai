@@ -239,7 +239,15 @@ Proceso:
 
 # 📸 Capturas
 
-*(Agregar imágenes del proyecto aquí.)*
+## Pantalla principal
+
+![Pantalla principal](docs/screenshots/home.png)
+
+---
+
+## Respuesta con fuentes
+
+![Fuentes](docs/screenshots/sources.png)
 
 ---
 
